@@ -1,4 +1,4 @@
-const CACHE_NAME = 'rancho-pwa-v4';
+const CACHE_NAME = 'secu-pwa-v4';
 const assets = [
   './',
   './index.html'
