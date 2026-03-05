@@ -143,9 +143,9 @@
 
         // GUARDAR AUDITORÍA
         const reg = { emp, tipo: tipoSeleccionado, hora, fecha, reporte, ts: ahora.getTime() };
-        let logs = JSON.parse(localStorage.getItem('secu_vAudit')) || [];
+        let logs = JSON.parse(localStorage.getItem('rancho_vAudit')) || [];
         logs.unshift(reg);
-        localStorage.setItem('secu_vAudit', JSON.stringify(logs.slice(0,30)));
+        localStorage.setItem('rancho_vAudit', JSON.stringify(logs.slice(0,30)));
         renderHistory();
 
         ejecutarEnvio(reporte);
@@ -163,7 +163,7 @@
     }
 
     function renderHistory() {
-        const logs = JSON.parse(localStorage.getItem('secu_vAudit')) || [];
+        const logs = JSON.parse(localStorage.getItem('rancho_vAudit')) || [];
         document.getElementById('history-list').innerHTML = logs.map((l, i) => `
             <div class="log-card" onclick="toggleLog(${i})">
                 <div class="log-header">
@@ -187,7 +187,7 @@
     }
 
     function reenviar(idx) {
-        const logs = JSON.parse(localStorage.getItem('secu_vAudit')) || [];
+        const logs = JSON.parse(localStorage.getItem('rancho_vAudit')) || [];
         ejecutarEnvio(logs[idx].reporte);
     }
 
@@ -195,6 +195,7 @@
 </script>
 </body>
 </html>
+
 
 
 
