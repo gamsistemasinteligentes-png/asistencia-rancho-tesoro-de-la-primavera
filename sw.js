@@ -1,26 +1,41 @@
-const CACHE_NAME = 'secu-pwa-v4';
-const assets = [
+// 1. CAMBIA ESTE NOMBRE PARA CADA CLIENTE (ej. 'asistencia-farmacia-v1')
+const CACHE_NAME = 'asistencia-rancho la primavera-v1'; 
+
+const ASSETS = [
   './',
-  './index.html'
+  './index.html',
+  './logo.png' // Asegúrate de que el logo exista en el repo
 ];
 
-self.addEventListener('install', e => {
-  self.skipWaiting();
+// Instalación: Guarda los archivos para uso offline
+self.addEventListener('install', (e) => {
   e.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(assets))
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(ASSETS);
+    })
   );
 });
 
-self.addEventListener('activate', e => {
-  e.waitUntil(caches.keys().then(keys => Promise.all(
-    keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
-  )));
+// Activación: Limpia cachés antiguos
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      );
+    })
+  );
 });
 
-self.addEventListener('fetch', e => {
+// Estrategia: Primero busca en red, si falla (offline), usa el caché
+self.addEventListener('fetch', (e) => {
   e.respondWith(
-    caches.match(e.request).then(res => {
-      return res || fetch(e.request);
+    fetch(e.request).catch(() => {
+      return caches.match(e.request);
     })
   );
 });
