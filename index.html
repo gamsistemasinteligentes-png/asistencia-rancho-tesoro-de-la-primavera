@@ -139,7 +139,7 @@
         const fecha = ahora.toLocaleDateString('es-MX', {day:'2-digit', month:'short'});
         const obs = document.getElementById('txtObs').value || "Sin observaciones";
 
-        const reporte = `🏢 *LA SECU - ASISTENCIA*\n👤 ${emp}\n🔘 ${tipoSeleccionado}\n🕒 ${hora}\n📅 ${fecha}\n📝 Obs: ${obs}\n\n✅ _Validado GPS Offline_`;
+        const reporte = `🏢 *Rancho el tesoro - ASISTENCIA*\n👤 ${emp}\n🔘 ${tipoSeleccionado}\n🕒 ${hora}\n📅 ${fecha}\n📝 Obs: ${obs}\n\n✅ _Validado GPS Offline_`;
 
         // GUARDAR AUDITORÍA
         const reg = { emp, tipo: tipoSeleccionado, hora, fecha, reporte, ts: ahora.getTime() };
@@ -195,6 +195,7 @@
 </script>
 </body>
 </html>
+
 
 
 
